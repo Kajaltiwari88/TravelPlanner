@@ -1,0 +1,7 @@
+@import "tailwindcss";
+
+#root {
+  background-color: var(--bg);
+  /* color: var(--primary-text-color); */
+  min-height: 100vh;
+}

@@ -1,0 +1,15 @@
+:root {
+  /* Light theme */
+  --bg: #f8fafc;
+  --primary-text-color: #0f172a;
+  --card: #ffffff;
+  --primary: #3b82f6;
+}
+
+.dark-theme {
+  /* Dark theme */
+  --bg: #020617;
+  --primary-text-color: #e5e7eb;
+  --card: #0f172a;
+  --primary: #60a5fa;
+}
