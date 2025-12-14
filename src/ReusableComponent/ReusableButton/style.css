@@ -1,0 +1,78 @@
+.app-btn.ant-btn {
+  border-radius: 10px;
+  font-weight: 500;
+  transition: all 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.app-btn--primary.ant-btn {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: var(--btn-primary-text);
+}
+
+.app-btn--primary.ant-btn:hover {
+  background: var(--primary-hover) !important;
+  border-color: var(--primary-hover) !important;
+  color: var(--text-primary) !important;
+}
+
+.app-btn--secondary.ant-btn {
+  background: var(--btn-secondary-bg);
+  border-color: var(--border);
+  color: var(--text-primary);
+}
+
+.app-btn--secondary.ant-btn:hover {
+  background: var(--btn-secondary-hover) !important;
+}
+
+.app-btn--outline.ant-btn {
+  background: transparent;
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.app-btn--outline.ant-btn:hover {
+  background: var(--primary);
+  color: var(--btn-primary-text);
+}
+
+.app-btn--ghost.ant-btn {
+  background: transparent;
+  border-color: transparent;
+  color: var(--text-secondary);
+}
+
+.app-btn--ghost.ant-btn:hover {
+  background: var(--bg-soft);
+  color: var(--text-primary);
+}
+
+.app-btn--danger.ant-btn {
+  background: var(--error);
+  border-color: var(--error);
+  color: #fff;
+}
+
+.app-btn--danger.ant-btn:hover {
+  opacity: 0.9;
+}
+
+.app-btn--link.ant-btn {
+  background: transparent;
+  border: none;
+  padding: 0;
+  color: var(--primary);
+}
+
+.app-btn--link.ant-btn:hover {
+  color: var(--primary-hover);
+}
+
+.app-btn.ant-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

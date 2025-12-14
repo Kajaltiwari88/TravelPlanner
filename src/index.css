@@ -1,7 +1,13 @@
+@import "./styles/font.css";
 @import "tailwindcss";
+
+body {
+  font-family: var(--font-main);
+}
 
 #root {
   background-color: var(--bg);
   /* color: var(--primary-text-color); */
   min-height: 100vh;
 }
+

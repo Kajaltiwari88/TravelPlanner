@@ -1,15 +1,98 @@
 :root {
-  /* Light theme */
-  --bg: #f8fafc;
-  --primary-text-color: #0f172a;
-  --card: #ffffff;
+  /* Brand Colors */
   --primary: #3b82f6;
+  --primary-hover: #2563eb;
+  --secondary: #0ea5e9;
+  --secondary-hover: #0284c7;
+  --accent: #f97316;
+
+  /* Backgrounds */
+  --bg: #f8fafc;
+  --bg-soft: #f1f5f9;
+  --bg-muted: #e2e8f0;
+
+  /* Cards */
+  --card: #ffffff;
+  --card-soft: #f9fafb;
+  --card-hover: #f3f4f6;
+
+  /* Text */
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #64748b;
+
+  /* Borders */
+  --border: #e2e8f0;
+  --border-strong: #cbd5e1;
+
+  /* Inputs */
+  --input-bg: #ffffff;
+  --input-border: #cbd5e1;
+  --input-placeholder: #94a3b8;
+
+  /* Buttons */
+  --btn-primary-text: #ffffff;
+  --btn-secondary-bg: #e2e8f0;
+  --btn-secondary-hover: #cbd5e1;
+
+  /* Shadows */
+  --shadow-soft: 0 2px 6px rgba(0, 0, 0, 0.05);
+  --shadow-medium: 0 4px 12px rgba(0, 0, 0, 0.08);
+
+  /* Other */
+  --success: #22c55e;
+  --warning: #facc15;
+  --error: #ef4444;
+
+  --font-main: "Inter";
 }
 
 .dark-theme {
-  /* Dark theme */
-  --bg: #020617;
-  --primary-text-color: #e5e7eb;
-  --card: #0f172a;
+  /* Brand Colors */
   --primary: #60a5fa;
+  --primary-hover: #3b82f6;
+  --secondary: #38bdf8;
+  --secondary-hover: #0ea5e9;
+  --accent: #fb923c;
+
+  /* Backgrounds */
+  --bg: #020617;
+  --bg-soft: #0f172a;
+  --bg-muted: #1e293b;
+
+  /* Cards */
+  --card: #0f172a;
+  --card-soft: #1e293b;
+  --card-hover: #334155;
+
+  /* Text */
+  --text-primary: #e5e7eb;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
+
+  /* Borders */
+  --border: #1f2937;
+  --border-strong: #334155;
+
+  /* Inputs */
+  --input-bg: #1e293b;
+  --input-border: #334155;
+  --input-placeholder: #64748b;
+
+  /* Buttons */
+  --btn-primary-text: #ffffff;
+  --btn-secondary-bg: #1e293b;
+  --btn-secondary-hover: #334155;
+
+  /* Shadows (minimal in dark) */
+  --shadow-soft: 0 2px 4px rgba(0, 0, 0, 0.3);
+  --shadow-medium: 0 4px 10px rgba(0, 0, 0, 0.4);
+
+  /* Other */
+  --success: #4ade80;
+  --warning: #fcd34d;
+  --error: #f87171;
+
+  /* Font */
+  --font-main: "Inter";
 }

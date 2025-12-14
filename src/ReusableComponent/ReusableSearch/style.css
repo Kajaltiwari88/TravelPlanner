@@ -1,0 +1,36 @@
+.app-search.ant-input-affix-wrapper {
+  background: var(--input-bg);
+  border-color: var(--input-border);
+  border-radius: 12px;
+  padding: 10px 12px;
+  transition: all 0.25s ease;
+}
+
+.app-search .ant-input {
+  background: transparent;
+  color: var(--text-primary) !important;
+  font-size: 14px;
+}
+
+.app-search .ant-input::placeholder {
+  color: var(--input-placeholder);
+}
+
+.app-search .anticon {
+  color: var(--text-muted);
+  font-size: 16px;
+}
+
+.app-search.ant-input-affix-wrapper:hover {
+  border-color: var(--primary);
+}
+
+.app-search.ant-input-affix-wrapper-focused {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--primary) 20%, transparent);
+}
+
+.app-search.ant-input-affix-wrapper-disabled {
+  background: var(--bg-muted);
+  opacity: 0.6;
+}
