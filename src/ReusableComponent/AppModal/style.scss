@@ -1,0 +1,17 @@
+.app-modal {
+  .ant-modal-container {
+    background: var(--card);
+    border-radius: 16px;
+    box-shadow: var(--shadow-medium);
+  }
+  .ant-modal-body {
+    padding: 10px;
+  }
+
+  .ant-modal-mask {
+    background-color: rgba(0, 0, 0, 0.45);
+  }
+  .ant-modal-close-icon{
+    color:var(--primary)
+  }
+}

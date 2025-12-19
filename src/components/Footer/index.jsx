@@ -8,7 +8,7 @@ const Footer = () => {
         transition-colors duration-300 
       "
     >
-      <div className="max-w-7xl mx-auto px-8 py-6 flex flex-col md:flex-row items-center justify-between gap-4">
+      <div className="mx-auto px-8 py-6 flex flex-col md:flex-row items-center justify-between gap-4">
         <p className="text-sm text-(--text-muted)">
           © {new Date().getFullYear()} SmartTravel. All rights reserved.
         </p>

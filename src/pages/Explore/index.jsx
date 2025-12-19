@@ -206,36 +206,36 @@ const Explore = () => {
   }));
 
   return (
-    <div className="p-4 flex flex-col gap-5">
-      <h3 className="text-(--text-primary) text-2xl">EXPLORE DESTINATIONS</h3>
+    <div className="px-6 py-6 flex flex-col gap-8 max-w-7xl mx-auto">
       <p className="text-2xl text-(--text-secondary)">
         Find places to plan your next trip
       </p>
-      <ReusableSearch />
 
-      <div className="flex gap-3 justify-center">
+      <div className="flex items-center justify-center gap-6">
+        <ReusableSearch className="w-full max-w-4xl" />
+        <span className="text-(--text-primary) text-2xl font-semibold">
+          EXPLORE DESTINATIONS
+        </span>
+      </div>
+
+      <div className="flex gap-4 justify-center">
         <ReusableButton
-          text={"Budget"}
-          className="w-[200px] min-h-14 self-center rounded-2xl! text-xl!"
+          text="Budget"
+          className="w-[200px] min-h-14 rounded-2xl! text-xl!"
         />
         <ReusableButton
-          text={"Popular"}
-          className="w-[200px] min-h-14 self-center rounded-2xl! text-xl!"
+          text="Popular"
+          className="w-[200px] min-h-14 rounded-2xl! text-xl!"
         />
         <ReusableButton
-          text={"Duration"}
-          className="w-[200px] min-h-14 self-center rounded-2xl! text-xl!"
+          text="Duration"
+          className="w-[200px] min-h-14 rounded-2xl! text-xl!"
         />
       </div>
 
-      <div className="grid grid-cols-1 gap-8 w-[90%] self-center">
-        {cards?.map((card, index) => (
-          <FeatureCard
-            key={index}
-            slides={[card]}
-            autoSlide={true}
-            interval={3000}
-          />
+      <div className="grid grid-cols-1 gap-8">
+        {cards.map((card, index) => (
+          <FeatureCard key={index} slides={[card]} autoSlide interval={3000} />
         ))}
       </div>
     </div>

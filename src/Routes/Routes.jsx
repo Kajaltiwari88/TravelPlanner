@@ -1,11 +1,15 @@
-import { createBrowserRouter, Link } from "react-router";
-import AuthPage from "../pages/Auth";
+import {
+  Link,
+  useRouteError,
+  isRouteErrorResponse,
+  createBrowserRouter,
+} from "react-router-dom";
 import Home from "../pages/Home";
+import AuthPage from "../pages/Auth";
 import AppLayout from "../layout/AppLayout";
 import Explore from "../pages/Explore";
 import AIAssistant from "../components/AIAssistant";
-
-import { useRouteError, isRouteErrorResponse } from "react-router";
+import PrivateRoutes from "./PrivateRoutes";
 
 export const RouteError = () => {
   const error = useRouteError();
@@ -13,11 +17,9 @@ export const RouteError = () => {
   let title = "Something went wrong";
   let message = "Unexpected error occurred.";
 
-  if (isRouteErrorResponse(error)) {
-    if (error?.status === 404) {
-      title = "404";
-      message = "Page not found";
-    }
+  if (isRouteErrorResponse(error) && error.status === 404) {
+    title = "404";
+    message = "Page not found";
   }
 
   return (
@@ -45,8 +47,6 @@ export const RouteError = () => {
   );
 };
 
-export default RouteError;
-
 export const Routes = createBrowserRouter([
   {
     element: <AppLayout />,
@@ -57,8 +57,13 @@ export const Routes = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "/explore",
-        element: <Explore />,
+        element: <PrivateRoutes />,
+        children: [
+          {
+            path: "/explore",
+            element: <Explore />,
+          },
+        ],
       },
       {
         path: "/ai-assistant",

@@ -1,8 +1,10 @@
 import { MoonFilled, MoonOutlined } from "@ant-design/icons";
 import { useTheme } from "../../context/ThemeContext";
 import { useNavigate } from "react-router";
+import { useAuth } from "../../context/AuthContext";
 
 const Navbar = () => {
+  const { user, logout } = useAuth();
   const { toggleTheme, theme } = useTheme();
   const navigate = useNavigate();
 
@@ -49,17 +51,31 @@ const Navbar = () => {
           Trips
         </span>
 
-        <span
-          className="
+        {user ? (
+          <span
+            className="
             text-(--text-secondary)
             cursor-pointer
             hover:text-(--primary)
             transition
           "
-          onClick={() => navigate("/auth")}
-        >
-          Login
-        </span>
+            onClick={() => logout()}
+          >
+            Logout
+          </span>
+        ) : (
+          <span
+            className="
+            text-(--text-secondary)
+            cursor-pointer
+            hover:text-(--primary)
+            transition
+          "
+            onClick={() => navigate("/auth")}
+          >
+            Login
+          </span>
+        )}
 
         <button
           onClick={toggleTheme}

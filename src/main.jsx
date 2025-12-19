@@ -1,17 +1,31 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { ThemeProvider } from "./context/ThemeContext.jsx";
-import { RouterProvider } from "react-router";
-import { Routes } from "./Routes/Routes.jsx";
+import { RouterProvider } from "react-router-dom";
+import { Routes } from "./Routes/Routes";
+import { AuthProvider } from "./context/AuthContext";
+import { ThemeProvider } from "./context/ThemeContext";
+import AppErrorBoundary from "./ReusableComponent/ErrorBoundary";
+import { Toaster } from "react-hot-toast";
 import "./index.css";
-import "../src/styles/theme.css";
-import AppErrorBoundary from "./ReusableComponent/ErrorBoundary/index.jsx";
+import "./styles/theme.css";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <ThemeProvider>
+      <Toaster
+        position="top-right"
+        toastOptions={{
+          duration: 4000,
+          style: {
+            background: "#363636",
+            color: "#fff",
+          },
+        }}
+      />
       <AppErrorBoundary>
-        <RouterProvider router={Routes}></RouterProvider>
+        <AuthProvider>
+          <RouterProvider router={Routes} />
+        </AuthProvider>
       </AppErrorBoundary>
     </ThemeProvider>
   </StrictMode>

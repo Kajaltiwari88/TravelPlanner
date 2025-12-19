@@ -1,9 +1,14 @@
 import { useNavigate } from "react-router-dom";
 import FeatureCard from "../../ReusableComponent/FeatureCards";
 import ReusableButton from "../../ReusableComponent/ReusableButton";
+import { useAuth } from "../../context/AuthContext";
+import { useState } from "react";
+import AppModal from "../../ReusableComponent/AppModal";
 
 const Home = () => {
   const navigate = useNavigate();
+  const { user } = useAuth();
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   const slides = [
     {
@@ -58,8 +63,21 @@ const Home = () => {
 
       <ReusableButton
         text={"Get Started"}
+        onClick={() => (user ? navigate("/explore") : setIsModalVisible(true))}
         className="w-[200px] min-h-14 self-center rounded-2xl! text-xl!"
       />
+      {
+        <AppModal
+          open={isModalVisible}
+          onClose={() => setIsModalVisible(false)}
+          secondaryText={"Cancel"}
+          primaryText={"Login"}
+          onPrimary={() => navigate("/auth")}
+          onSecondary={() => setIsModalVisible(false)}
+          title="Login to unlock Smart Travel ✨"
+          description="Sign in to explore personalized trip planning, AI recommendations, and save your journeys for later."
+        />
+      }
     </div>
   );
 };
