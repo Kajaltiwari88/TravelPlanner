@@ -1,25 +1,39 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SendOutlined } from "@ant-design/icons";
 
-const AIAssistant = () => {
-  const [messages, setMessages] = useState([
-    {
-      role: "ai",
-      text: "Hi 👋 I’m your SmartTravel AI assistant. How can I help you today?",
-    },
-  ]);
-
+const AIAssistant = ({ context, autoGenerate }) => {
+  const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
 
+  useEffect(() => {
+    if (!context?.destination) return;
+
+    if (autoGenerate) {
+      setMessages([
+        {
+          role: "ai",
+          text: `✨ I’ve created a ${context?.days}-day ${context?.budget} budget trip to ${context?.destination} based on your preferences. Let me know if you want to refine it!`,
+        },
+      ]);
+    } else {
+      setMessages([
+        {
+          role: "ai",
+          text: `Nice choice! ${context.destination} is a great place to visit 🌄 What would you like to know?`,
+        },
+      ]);
+    }
+  }, [context, autoGenerate]);
+
   const handleSend = () => {
-    if (!input.trim()) return;
+    if (!input?.trim()) return;
 
     setMessages((prev) => [
       ...prev,
       { role: "user", text: input },
       {
         role: "ai",
-        text: "Got it! I’ll help you plan this ✨",
+        text: "Got it! Let me help with that ✨",
       },
     ]);
 
@@ -32,8 +46,8 @@ const AIAssistant = () => {
         <h1 className="text-2xl font-semibold text-(--text-primary)">
           AI Travel Assistant
         </h1>
-        <p className="text-sm text-(--text-secondary) mt-1">
-          Ask anything about trips, destinations, or planning.
+        <p className="text-sm text-(--text-secondary)">
+          Chat freely or refine your trip plan.
         </p>
       </div>
 
@@ -42,9 +56,9 @@ const AIAssistant = () => {
           <div
             key={index}
             className={`max-w-[70%] px-4 py-3 text-sm rounded-2xl ${
-              msg?.role === "user"
+              msg.role === "user"
                 ? "ml-auto bg-(--primary) text-(--btn-primary-text)"
-                : "mr-auto bg-(--card) text-(--text-primary) shadow-sm border border-(--input-border)"
+                : "mr-auto bg-(--card) text-(--text-primary) border border-(--input-border)"
             }`}
           >
             {msg?.text}
@@ -57,12 +71,10 @@ const AIAssistant = () => {
           value={input}
           onChange={(e) => setInput(e?.target?.value)}
           onKeyDown={(e) => e.key === "Enter" && handleSend()}
-          placeholder="Ask me anything about your trip..."
+          placeholder="Ask me anything..."
           className="
             flex-1 rounded-xl px-4 py-3 text-sm
             bg-(--input-bg)
-            text-(--text-primary)
-            placeholder-(--input-placeholder)
             border border-(--input-border)
             focus:outline-none
             focus:border-(--primary)
@@ -72,12 +84,9 @@ const AIAssistant = () => {
         <button
           onClick={handleSend}
           className="
-            flex items-center justify-center
             rounded-xl px-4 py-3
             bg-(--primary)
             text-(--btn-primary-text)
-            hover:bg-(--primary-hover)
-            transition cursor-pointer
           "
         >
           <SendOutlined />

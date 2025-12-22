@@ -15,7 +15,7 @@ const FeatureCard = ({ slides = [], autoSlide = true, interval = 3000 }) => {
   }, [slides?.length]);
 
   return (
-    <div className="relative w-full overflow-hidden rounded-3xl">
+    <div className="relative w-full overflow-hidden rounded-3xl bg-linear-to-r from-black/70 via-black/40 to-black/10">
       <div
         className="flex transition-transform duration-500 ease-in-out"
         style={{
@@ -29,7 +29,7 @@ const FeatureCard = ({ slides = [], autoSlide = true, interval = 3000 }) => {
             onClick={slide?.onClick}
           >
             <div
-              className="absolute inset-0 bg-cover bg-center bg-linear-to-r from-black/70 via-black/40 to-black/10"
+              className="absolute inset-0 bg-cover bg-center bg-black/70"
               style={{ backgroundImage: `url(${slide?.imageUrl})` }}
             />
 
@@ -38,7 +38,7 @@ const FeatureCard = ({ slides = [], autoSlide = true, interval = 3000 }) => {
               <h2 className="text-3xl font-bold text-(--btn-primary-text) mb-2">
                 {slide?.title}
               </h2>
-              <p className="text-lg text-gray-200 max-w-lg">
+              <p className="text-lg text-[#EEEEEE] max-w-lg">
                 {slide?.description}
               </p>
             </div>
@@ -46,17 +46,19 @@ const FeatureCard = ({ slides = [], autoSlide = true, interval = 3000 }) => {
         ))}
       </div>
 
-      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 cursor-pointer">
-        {slides?.map((_, i) => (
-          <button
-            key={i}
-            onClick={() => setActiveIndex(i)}
-            className={`w-2.5 h-2.5 rounded-full transition ${
-              i === activeIndex ? "bg-white" : "bg-white/40 hover:bg-white/70"
-            }`}
-          />
-        ))}
-      </div>
+      {autoSlide && (
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 cursor-pointer">
+          {slides?.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setActiveIndex(i)}
+              className={`w-2.5 h-2.5 rounded-full transition ${
+                i === activeIndex ? "bg-white" : "bg-white/40 hover:bg-white/70"
+              }`}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 };

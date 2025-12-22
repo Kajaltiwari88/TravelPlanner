@@ -11,3 +11,18 @@ body {
   min-height: 100vh;
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* For Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.ant-modal-container {
+  background-color: var(--input-bg) !important;
+  border: 1px solid var(--input-border) !important;
+}

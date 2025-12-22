@@ -10,6 +10,7 @@ import AppLayout from "../layout/AppLayout";
 import Explore from "../pages/Explore";
 import AIAssistant from "../components/AIAssistant";
 import PrivateRoutes from "./PrivateRoutes";
+import AIPlanner from "../pages/AI_Planner";
 
 export const RouteError = () => {
   const error = useRouteError();
@@ -67,7 +68,7 @@ export const Routes = createBrowserRouter([
       },
       {
         path: "/ai-assistant",
-        element: <AIAssistant />,
+        element: <AIPlanner />,
       },
     ],
   },

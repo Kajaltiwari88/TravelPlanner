@@ -1,0 +1,87 @@
+.app-select {
+  background-color: var(--input-bg) !important;
+  border: 1px solid var(--input-border) !important;
+  color: var(--text-primary) !important;
+  font-family: "Inter";
+  .ant-select-input {
+    color: var(--text-primary) !important;
+  }
+  .ant-select-selector {
+    background-color: var(--input-bg) !important;
+    border: 1px solid var(--input-border) !important;
+    border-radius: 12px !important;
+    color: var(--text-primary) !important;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    transition: border-color 0.2s ease;
+  }
+
+  &.ant-select-focused {
+    .ant-select-selector {
+      border-color: var(--primary) !important;
+      box-shadow: none !important;
+    }
+  }
+
+  .ant-select-selection-placeholder {
+    color: var(--input-placeholder) !important;
+  }
+
+  .ant-select-selection-item {
+    color: var(--text-primary) !important;
+  }
+
+  .ant-select-selection-item-content {
+    color: var(--text-primary);
+  }
+
+  .ant-select-selection-item-remove {
+    color: var(--text-secondary);
+
+    &:hover {
+      color: var(--primary);
+    }
+  }
+  .ant-select-content-value {
+    color: var(--text-primary) !important;
+  }
+  .ant-select-placeholder {
+    color: var(--text-secondary) !important;
+  }
+  .anticon {
+    color: var(--text-secondary) !important;
+
+    .anticon-check {
+      color: var(--text-secondary) !important;
+    }
+  }
+}
+
+.app-select-dropdown {
+  background-color: var(--card) !important;
+  border-radius: 12px;
+  padding: 4px;
+  font-family: "Inter";
+
+  .ant-select-item {
+    color: var(--text-primary);
+    border-radius: 8px;
+    margin: 2px 0;
+  }
+
+  .ant-select-item-option-active {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+
+  .ant-select-item-option-selected {
+    background-color: var(--primary) !important;
+    color: var(--btn-primary-text) !important;
+  }
+}
+
+.ant-select-open {
+  .ant-select-input {
+    color: var(--text-primary) !important;
+  }
+}
