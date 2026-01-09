@@ -68,7 +68,7 @@ const Explore = () => {
     search?.trim()?.length > 0 && filteredCards?.length === 0 && !showAIPlanner;
 
   return (
-    <div className="px-6 py-6 flex flex-col gap-8 max-w-7xl mx-auto">
+    <div className="px-4 py-8 flex flex-col gap-8 max-w-7xl mx-auto">
       <p className="text-2xl text-(--text-secondary)">
         Find places to plan your next trip
       </p>
@@ -115,7 +115,7 @@ const Explore = () => {
                   Plan your trip to {search || searchMain}
                 </h2>
                 <p className="text-(--text-secondary)">
-                  We couldn’t find this destination in our featured list, but
+                  We couldn't find this destination in our featured list, but
                   our AI can create a personalized trip plan for you.
                 </p>
               </div>
@@ -144,6 +144,7 @@ const Explore = () => {
             />
           ))
         )}
+
       </div>
     </div>
   );

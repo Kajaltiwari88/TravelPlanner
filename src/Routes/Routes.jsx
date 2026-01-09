@@ -8,9 +8,10 @@ import Home from "../pages/Home";
 import AuthPage from "../pages/Auth";
 import AppLayout from "../layout/AppLayout";
 import Explore from "../pages/Explore";
-import AIAssistant from "../components/AIAssistant";
 import PrivateRoutes from "./PrivateRoutes";
 import AIPlanner from "../pages/AI_Planner";
+import Trips from "../pages/Trips/AllTrips";
+import TripDetail from "./../pages/Trips/TripIternary";
 
 export const RouteError = () => {
   const error = useRouteError();
@@ -69,6 +70,14 @@ export const Routes = createBrowserRouter([
       {
         path: "/ai-assistant",
         element: <AIPlanner />,
+      },
+      {
+        path: "/trips",
+        element: <Trips />,
+      },
+      {
+        path: "/trips/:id",
+        element: <TripDetail />,
       },
     ],
   },

@@ -1,8 +1,8 @@
 import { Modal } from "antd";
 import { useState } from "react";
-import ReusableInput from "../../ReusableComponent/ReusableInput";
-import ReusableSelect from "../../ReusableComponent/ReusableSelect";
-import ReusableButton from "../../ReusableComponent/ReusableButton";
+import ReusableInput from "../../../ReusableComponent/ReusableInput";
+import ReusableSelect from "../../../ReusableComponent/ReusableSelect";
+import ReusableButton from "../../../ReusableComponent/ReusableButton";
 
 const TripPlannerModal = ({ open, onClose, onSubmit, destination }) => {
   const [formData, setFormData] = useState({
@@ -22,7 +22,7 @@ const TripPlannerModal = ({ open, onClose, onSubmit, destination }) => {
 
   const isFormValid =
     Number(formData?.days) > 0 &&
-    Boolean(formData?.budget) &&
+    Number(formData?.budget) > 0 &&
     Boolean(formData?.interests);
 
   const handleGenerate = () => {
@@ -64,16 +64,13 @@ const TripPlannerModal = ({ open, onClose, onSubmit, destination }) => {
           onChange={handleInputChange}
         />
 
-        <ReusableSelect
+        <ReusableInput
           label="Budget"
+          name="budget"
+          type="number"
+          placeholder="Enter your budget"
           value={formData?.budget}
-          placeholder="Select Budget Range"
-          options={[
-            { label: "Low", value: "low" },
-            { label: "Medium", value: "medium" },
-            { label: "High", value: "high" },
-          ]}
-          onChange={(value) => handleSelectChange("budget", value)}
+          onChange={handleInputChange}
         />
 
         <ReusableSelect

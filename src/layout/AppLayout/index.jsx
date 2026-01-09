@@ -15,7 +15,7 @@ const AppLayout = () => {
 
       <main className="relative flex-1 overflow-y-auto z-10">
         <Outlet />
-        {location.pathname !== "/ai-assistant" && (
+        {(location?.pathname === "/") && (
           <div
             className="relative z-20"
             onClick={() => navigate("/ai-assistant")}

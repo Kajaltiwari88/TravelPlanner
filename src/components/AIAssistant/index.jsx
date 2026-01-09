@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { SendOutlined } from "@ant-design/icons";
 
-const AIAssistant = ({ context, autoGenerate }) => {
+const AIAssistant = ({ context, autoGenerate, onItineraryGenerated }) => {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
 
@@ -11,15 +11,20 @@ const AIAssistant = ({ context, autoGenerate }) => {
     if (autoGenerate) {
       setMessages([
         {
+          role: "user",
+          text: `I want ${context?.days}-days ${context?.budget} budget trip to ${context?.destination} based on my preferences .`,
+        },
+        {
           role: "ai",
-          text: `✨ I’ve created a ${context?.days}-day ${context?.budget} budget trip to ${context?.destination} based on your preferences. Let me know if you want to refine it!`,
+          text: `✨ I’ve created a trip based on your preferences.Let me know if you want to refine it!`,
         },
       ]);
+      onItineraryGenerated?.();
     } else {
       setMessages([
         {
           role: "ai",
-          text: `Nice choice! ${context.destination} is a great place to visit 🌄 What would you like to know?`,
+          text: `Nice choice! ${context?.destination} is a great place to visit 🌄 What would you like to know?`,
         },
       ]);
     }
@@ -78,6 +83,7 @@ const AIAssistant = ({ context, autoGenerate }) => {
             border border-(--input-border)
             focus:outline-none
             focus:border-(--primary)
+            text-(--text-primary)
           "
         />
 
