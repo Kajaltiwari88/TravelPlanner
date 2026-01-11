@@ -49,3 +49,9 @@ input[type="number"] {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--primary-hover);
 }
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}

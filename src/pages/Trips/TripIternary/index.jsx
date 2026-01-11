@@ -8,6 +8,8 @@ import {
 import ReusableButton from "../../../ReusableComponent/ReusableButton";
 import TripMap from "../../../components/Trips/MapCheckPoints";
 import TripExpenses from "../../../components/Trips/ExpenseTracker";
+import AppCard from "../../../ReusableComponent/ReusableCards";
+import TripWeather from "../../../components/Trips/TripWeather";
 
 const trips = [
   { id: "1", destination: "Manali", days: 5, budget: "Medium" },
@@ -19,6 +21,7 @@ const sections = [
   { key: "itinerary", label: "Itinerary" },
   { key: "map", label: "Map" },
   { key: "expenses", label: "Expenses" },
+  { key: "weather", label: "Weather" },
 ];
 
 const headerActions = [
@@ -55,7 +58,7 @@ const TripDetail = () => {
     <div className="max-w-5xl mx-auto px-4 py-8">
       <ReusableButton
         text="Back to Trips"
-        variant="text"
+        variant="primary"
         icon={<ArrowLeftOutlined />}
         onClick={() => navigate("/trips")}
         className="mb-3"
@@ -82,7 +85,7 @@ const TripDetail = () => {
       </div>
 
       <div className="flex gap-3 mb-8">
-        {sections.map((section) => (
+        {sections?.map((section) => (
           <ReusableButton
             key={section.key}
             text={section.label}
@@ -94,31 +97,24 @@ const TripDetail = () => {
 
       {activeSection === "itinerary" && (
         <div className="space-y-4">
-          {Array.from({ length: trip.days }).map((_, index) => (
-            <div
+          {Array?.from({ length: trip.days }).map((_, index) => (
+            <AppCard
               key={index}
-              className="
-                rounded-2xl
-                bg-(--bg-soft)
-                border border-(--input-border)
-                p-5
-              "
+              title={`Day ${index + 1}`}
+              subtitle={`Sightseeing • Local food • Leisure & rest`}
+              onClick={() => navigate(`/trips/${trip.id}`)}
             >
-              <h3 className="text-lg font-semibold text-(--text-primary)">
-                Day {index + 1}
-              </h3>
-
-              <p className="mt-2 text-sm text-(--text-secondary)">
-                • Sightseeing • Local food • Leisure & rest
-              </p>
-            </div>
+              {/* <p className="text-sm text-(--text-secondary)">
+                Click to view full itinerary, weather, map & expenses.
+              </p> */}
+            </AppCard>
           ))}
         </div>
       )}
 
       {activeSection === "map" && <TripMap />}
-
       {activeSection === "expenses" && <TripExpenses />}
+      {activeSection === "weather" && <TripWeather />}
     </div>
   );
 };

@@ -148,3 +148,28 @@ export const destinations = [
     image: "https://images.unsplash.com/photo-1540202404-1b927e27fa8b?w=1200",
   },
 ];
+
+export const WEATHER_MAP = {
+  0: { icon: "☀️", label: "Sunny" },
+  1: { icon: "🌤️", label: "Mostly Sunny" },
+  2: { icon: "⛅", label: "Partly Cloudy" },
+  3: { icon: "☁️", label: "Cloudy" },
+
+  45: { icon: "🌁", label: "Foggy" },
+  48: { icon: "🌁", label: "Dense Fog" },
+
+  51: { icon: "🌦️", label: "Light Drizzle" },
+  53: { icon: "🌦️", label: "Drizzle" },
+  55: { icon: "🌦️", label: "Heavy Drizzle" },
+
+  61: { icon: "🌧️", label: "Rainy" },
+  63: { icon: "🌧️", label: "Heavy Rain" },
+  65: { icon: "🌧️", label: "Very Heavy Rain" },
+
+  71: { icon: "❄️", label: "Snow" },
+  73: { icon: "❄️", label: "Snowfall" },
+  75: { icon: "❄️", label: "Heavy Snow" },
+
+  80: { icon: "🌦️", label: "Rain Showers" },
+  81: { icon: "🌦️", label: "Heavy Showers" },
+};
