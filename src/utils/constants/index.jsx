@@ -14,3 +14,5 @@ export const SavedTrips =
   "https://images.unsplash.com/photo-1502920514313-52581002a659?q=80&w=1400";
 
 export const WeatherApi = "https://api.open-meteo.com/v1/forecast";
+
+export const geoCodingApi = "https://geocoding-api.open-meteo.com/v1/search";
