@@ -46,7 +46,7 @@ const Explore = () => {
     }
 
     const filteredData = cards?.filter((item) =>
-      item?.title?.toLowerCase()?.includes(debouncedSearch?.toLowerCase())
+      item?.title?.toLowerCase()?.includes(debouncedSearch?.toLowerCase()),
     );
 
     setFilteredCards(filteredData);
@@ -144,7 +144,15 @@ const Explore = () => {
             />
           ))
         )}
-
+      </div>
+      <div className="self-center text-(--text-primary)">
+        Could not find your destional.{" "}
+        <span
+          className="text-(--primary) cursor-pointer"
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+        >
+          Click Here
+        </span>
       </div>
     </div>
   );
