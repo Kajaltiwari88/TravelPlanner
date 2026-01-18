@@ -1,6 +1,7 @@
 import { Modal } from "antd";
 import ReusableButton from "../ReusableButton";
 import "./style.scss";
+import ReusableInput from "./../ReusableInput/index";
 
 const AppModal = ({
   open,
@@ -13,6 +14,9 @@ const AppModal = ({
   onClose,
   loading = false,
   danger = false,
+  isInputRequired = false,
+  inputVal,
+  handleInputChange,
 }) => {
   return (
     <Modal
@@ -35,6 +39,15 @@ const AppModal = ({
         </p>
       )}
 
+      {isInputRequired && (
+        <ReusableInput
+          // label="Enter the name for your note"
+          placeholder="Type here"
+          value={inputVal}
+          onChange={handleInputChange}
+          className="w-[100px] h-10! text-[16px]!"
+        />
+      )}
       <div className="mt-6 flex justify-end gap-3">
         {secondaryText && (
           <ReusableButton

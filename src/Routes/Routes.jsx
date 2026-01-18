@@ -12,6 +12,8 @@ import PrivateRoutes from "./PrivateRoutes";
 import AIPlanner from "../pages/AI_Planner";
 import Trips from "../pages/Trips/AllTrips";
 import TripDetail from "./../pages/Trips/TripIternary";
+import NotesPage from "../pages/NotePad";
+import SavedNotes from "../pages/NotePad/SavedNotes";
 
 export const RouteError = () => {
   const error = useRouteError();
@@ -78,6 +80,14 @@ export const Routes = createBrowserRouter([
       {
         path: "/trips/:id",
         element: <TripDetail />,
+      },
+      {
+        path: "/notes",
+        element: <NotesPage />,
+      },
+      {
+        path: "/notes/saved",
+        element: <SavedNotes />,
       },
     ],
   },
