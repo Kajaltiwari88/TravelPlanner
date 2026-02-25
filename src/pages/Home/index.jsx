@@ -23,7 +23,7 @@ const Home = () => {
       title: "AI Trip Planner",
       description: "Get personalized day-by-day itineraries in seconds",
       imageUrl: AIImageURL,
-      onClick: () => navigate("/trip/customize"),
+      onClick: () => navigate("/ai-assistant"),
     },
     {
       icon: "🗺️",
