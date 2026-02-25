@@ -1,23 +1,26 @@
 import { CalendarOutlined, BankOutlined } from "@ant-design/icons";
+import AppCard from "../../../ReusableComponent/ReusableCards";
 
-const TripsSummary = ({ trip, onClick }) => {
+const TripsSummary = ({ trip, onClick, onEdit, onDelete }) => {
+  
+  const menuItems = [
+    {
+      label: "✏️ Edit",
+      onClick: () => onEdit?.(trip),
+    },
+    {
+      label: "❌ Delete",
+      onClick: () => onDelete?.(trip),
+    },
+  ];
+
   return (
-    <div
+    <AppCard
       onClick={onClick}
-      className="
-        cursor-pointer
-        rounded-2xl
-        bg-(--card)
-        border border-(--input-border)
-        p-6
-        hover:shadow-lg
-        transition
-      "
+      title={trip?.destination}
+      menuItems={menuItems}
+      className="p-6"
     >
-      <h2 className="text-xl text-(--text-primary) font-semibold">
-        {trip?.destination}
-      </h2>
-
       <div className="mt-4 text-sm text-(--text-secondary) space-y-2">
         <div className="flex items-center gap-2">
           <CalendarOutlined className="text-(--primary)" />
@@ -29,7 +32,7 @@ const TripsSummary = ({ trip, onClick }) => {
           {trip?.budget} Budget
         </div>
       </div>
-    </div>
+    </AppCard>
   );
 };
 

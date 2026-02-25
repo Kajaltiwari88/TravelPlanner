@@ -1,6 +1,7 @@
 import {
   addDoc,
   collection,
+  deleteDoc,
   doc,
   getDoc,
   getDocs,
@@ -50,4 +51,13 @@ export const getSingleTrip = async (userId, tripId) => {
     id: snapshot.id,
     ...snapshot.data(),
   };
+};
+
+export const deleteTrip = async (userId, tripId) => {
+  if (!userId || !tripId) {
+    throw new Error("Missing userId or tripId");
+  }
+
+  const ref = doc(db, "users", userId, "trips", tripId);
+  await deleteDoc(ref);
 };

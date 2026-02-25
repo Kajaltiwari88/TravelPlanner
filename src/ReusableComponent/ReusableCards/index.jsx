@@ -1,5 +1,5 @@
 import { MoreOutlined } from "@ant-design/icons";
-import { useState } from "react";
+import { useEffect, useId, useState } from "react";
 
 const AppCard = ({
   title,
@@ -11,6 +11,17 @@ const AppCard = ({
   menuItems = [],
 }) => {
   const [openMenu, setOpenMenu] = useState(false);
+  const menuId = useId();
+
+  useEffect(() => {
+    const handleMenuOpen = (event) => {
+      if (event?.detail?.id !== menuId) {
+        setOpenMenu(false);
+      }
+    };
+    window.addEventListener("appcard:menu-open", handleMenuOpen);
+    return () => window.removeEventListener("appcard:menu-open", handleMenuOpen);
+  }, [menuId]);
 
   return (
     <div
@@ -47,7 +58,17 @@ const AppCard = ({
                 <button
                   onClick={(e) => {
                     e?.stopPropagation();
-                    setOpenMenu((prev) => !prev);
+                    setOpenMenu((prev) => {
+                      const next = !prev;
+                      if (next) {
+                        window.dispatchEvent(
+                          new CustomEvent("appcard:menu-open", {
+                            detail: { id: menuId },
+                          }),
+                        );
+                      }
+                      return next;
+                    });
                   }}
                   className="text-(--text-secondary) hover:text-(--primary) cursor-pointer"
                 >
