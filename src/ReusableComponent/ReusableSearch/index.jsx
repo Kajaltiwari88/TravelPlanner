@@ -6,6 +6,7 @@ const ReusableSearch = ({
   value,
   onChange,
   onSearch,
+  inputRef,
   placeholder = "Search",
   size = "middle",
   disabled = false,
@@ -14,6 +15,7 @@ const ReusableSearch = ({
 }) => {
   return (
     <Input
+      ref={inputRef}
       value={value}
       onChange={onChange}
       onPressEnter={onSearch}

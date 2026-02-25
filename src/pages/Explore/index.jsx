@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { destinations, typeIconMap } from "../../utils/helpers/helpers";
 import FeatureCard from "../../ReusableComponent/FeatureCards";
 import ReusableButton from "../../ReusableComponent/ReusableButton";
@@ -8,6 +8,8 @@ import { setSearchInput } from "../../redux/reducers/explore";
 import { useNavigate } from "react-router";
 
 const Explore = () => {
+  const topRef = useRef(null);
+  const searchRef = useRef(null);
   const [search, setSearch] = useState("");
   const [debouncedSearch, setDebouncedSearch] = useState("");
   const [filteredCards, setFilteredCards] = useState([]);
@@ -68,7 +70,10 @@ const Explore = () => {
     search?.trim()?.length > 0 && filteredCards?.length === 0 && !showAIPlanner;
 
   return (
-    <div className="px-4 py-8 flex flex-col gap-8 max-w-7xl mx-auto">
+    <div
+      ref={topRef}
+      className="px-4 py-8 flex flex-col gap-8 max-w-7xl mx-auto"
+    >
       <p className="text-2xl text-(--text-secondary)">
         Find places to plan your next trip
       </p>
@@ -79,6 +84,7 @@ const Explore = () => {
           value={search}
           onChange={(e) => setSearch(e?.target?.value)}
           onSearch={handleSearch}
+          inputRef={searchRef}
         />
         <span className="text-(--text-primary) text-2xl font-semibold">
           EXPLORE DESTINATIONS
@@ -145,15 +151,20 @@ const Explore = () => {
           ))
         )}
       </div>
-      <div className="self-center text-(--text-primary)">
-        Could not find your destional.{" "}
-        <span
-          className="text-(--primary) cursor-pointer"
-          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-        >
-          Click Here
-        </span>
-      </div>
+      {!search?.trim() && (
+        <div className="self-center text-(--text-primary)">
+          Could not find your destination.{" "}
+          <span
+            className="text-(--primary) cursor-pointer"
+            onClick={() => {
+              searchRef.current?.focus();
+              searchRef.current?.scrollIntoView({ behavior: "smooth" });
+            }}
+          >
+            Click Here
+          </span>
+        </div>
+      )}
     </div>
   );
 };
