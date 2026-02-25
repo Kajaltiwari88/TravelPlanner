@@ -35,7 +35,7 @@ const AppCard = ({
               </h3>
             )}
             {subtitle && (
-              <p className="text-sm text-(--text-secondary)">{subtitle}</p>
+              <div className="text-sm text-(--text-secondary)">{subtitle}</div>
             )}
           </div>
 
