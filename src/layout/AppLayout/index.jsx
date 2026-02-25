@@ -8,12 +8,12 @@ const AppLayout = () => {
   const location = useLocation();
   
   return (
-    <div className="h-screen flex flex-col bg-(--bg) overflow-hidden">
-      <header className="relative z-50">
+    <div className="min-h-screen flex flex-col bg-(--bg)">
+      <header className="sticky top-0 z-50">
         <Navbar />
       </header>
 
-      <main className="relative flex-1 overflow-y-auto z-10">
+      <main className="relative flex-1 z-10">
         <Outlet />
         {(location?.pathname === "/") && (
           <div
@@ -25,7 +25,7 @@ const AppLayout = () => {
         )}
       </main>
 
-      <footer className="relative z-50">
+      <footer className="relative z-50 mt-auto">
         <Footer />
       </footer>
     </div>

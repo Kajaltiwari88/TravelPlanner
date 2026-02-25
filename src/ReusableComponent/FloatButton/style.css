@@ -1,7 +1,7 @@
 .chat-float-btn.ant-float-btn {
-  position: absolute !important; 
-  top: 90px;
-  right: 4px;
+  position: fixed !important;
+  right: 20px;
+  bottom: 90px;
   background: var(--primary) !important;
   box-shadow: var(--shadow-medium);
   border-radius: 999px;
@@ -19,8 +19,9 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  padding-inline: 14px;
+  padding-inline: 0;
   width: 100%;
+  justify-content: center;
 }
 
 .chat-float-btn:hover,
@@ -38,9 +39,15 @@
   font-size: 16px !important;
   font-weight: 500;
   color: var(--btn-primary-text);
+  display: none;
   opacity: 0;
   transform: translateX(-6px);
   transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.chat-float-btn:not(.open) .ant-float-btn-body {
+  justify-content: center;
+  padding-inline: 0;
 }
 
 @media (hover: hover) {
@@ -49,6 +56,7 @@
   }
 
   .chat-float-btn:hover .chat-text {
+    display: inline;
     opacity: 1;
     transform: translateX(0);
   }
@@ -59,12 +67,14 @@
 }
 
 .chat-float-btn.open .chat-text {
+  display: inline;
   opacity: 1;
   transform: translateX(0);
 }
 
 @media (max-width: 768px) {
   .chat-float-btn.ant-float-btn {
-    top: 50px;
+    right: 12px;
+    bottom: 80px;
   }
 }
