@@ -4,10 +4,14 @@ import Confetti from "react-confetti";
 import AIAssistant from "../../components/AIAssistant";
 import TripPlannerModal from "../../components/Trips/TripPlannerForm";
 import SuccessModal from "../../ReusableComponent/SuccessModal";
+import { savedTripsItinerary } from "../../firebase/tripServices";
+import { useAuth } from "../../context/AuthContext";
+import toast from "react-hot-toast";
 
 const AIPlanner = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const { user } = useAuth();
   const { destination } = location.state || {};
   const [showModal, setShowModal] = useState(true);
   const [tripContext, setTripContext] = useState(null);
@@ -27,13 +31,32 @@ const AIPlanner = () => {
     setShowModal(false);
   };
 
-  const handleItineraryGenerated = () => {
-    setShowSuccessModal(true);
-    setShowConfetti(true);
+  const handleItineraryGenerated = async (itineraryText) => {
+    try {
+      if (!user?.uid) {
+        toast.error("Please sign in to save your trip.");
+        return;
+      }
 
-    setTimeout(() => {
-      setShowConfetti(false);
-    }, 6000);
+      if (!tripContext) {
+        toast.error("Trip details are missing. Please try again.");
+        return;
+      }
+
+      await savedTripsItinerary({
+        userId: user?.uid,
+        tripContext,
+        itineraryText,
+      });
+      setShowSuccessModal(true);
+      setShowConfetti(true);
+      setTimeout(() => {
+        setShowConfetti(false);
+      }, 6000);
+    } catch (error) {
+      console.error("Failed to save trip", error);
+      toast.error("Failed to generate itinerary!");
+    }
   };
 
   return (

@@ -1,13 +1,27 @@
 import { useNavigate } from "react-router-dom";
 import TripsSummary from "./../../../components/Trips/TripsSummary";
-
-const trips = [
-  { id: "1", destination: "Manali", days: 5, budget: 1000 },
-  { id: "2", destination: "Goa", days: 4, budget: 1000 },
-  { id: "3", destination: "Udaipur", days: 3, budget: 1000},
-];
+import { useEffect, useState } from "react";
+import { getUserTrips } from "../../../firebase/tripServices";
+import { useAuth } from "../../../context/AuthContext";
 
 const Trips = () => {
+  const { user } = useAuth();
+  const [trips, setTrips] = useState([]);
+
+  useEffect(() => {
+    if (!user?.uid) return;
+
+    const fetchTrips = async () => {
+      try {
+        const data = await getUserTrips(user?.uid);
+        setTrips(data);
+      } catch (err) {
+        console.error("Failed to fetch trips:", err);
+      }
+    };
+
+    fetchTrips();
+  }, [user?.uid]);
   const navigate = useNavigate();
 
   return (

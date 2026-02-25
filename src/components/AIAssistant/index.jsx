@@ -4,9 +4,32 @@ import { SendOutlined } from "@ant-design/icons";
 const AIAssistant = ({ context, autoGenerate, onItineraryGenerated }) => {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
+  const generateDummyItinerary = (context) => {
+    return `
+🌍 Trip to ${context.destination}
+
+🗓 Duration: ${context.days} days
+💰 Budget: ${context.budget}
+
+Day 1:
+- Arrival and local sightseeing
+- Visit main attractions
+
+Day 2:
+- Explore popular landmarks
+- Try local cuisine
+
+Day 3:
+- Relax and shopping
+- Departure
+
+✨ Enjoy your trip!
+`;
+  };
 
   useEffect(() => {
     if (!context?.destination) return;
+    const dummyItinerary = generateDummyItinerary(context);
 
     if (autoGenerate) {
       setMessages([
@@ -16,10 +39,10 @@ const AIAssistant = ({ context, autoGenerate, onItineraryGenerated }) => {
         },
         {
           role: "ai",
-          text: `✨ I’ve created a trip based on your preferences.Let me know if you want to refine it!`,
+          text: `✨ I've created a trip based on your preferences.Let me know if you want to refine it!`,
         },
       ]);
-      onItineraryGenerated?.();
+      onItineraryGenerated?.(dummyItinerary);
     } else {
       setMessages([
         {
