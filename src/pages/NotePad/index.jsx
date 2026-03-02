@@ -15,6 +15,7 @@ const NotesPage = () => {
   const [name, setName] = useState("");
   const [noteId, setNoteId] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (location?.state) {
@@ -29,7 +30,7 @@ const NotesPage = () => {
       toast.error("Please login to save notes");
       return;
     }
-
+    setLoading(true);
     try {
       if (noteId) {
         await updateDoc(doc(db, "notes", noteId), {
@@ -55,6 +56,8 @@ const NotesPage = () => {
     } catch (error) {
       console.error("Error saving note:", error);
       toast.error("Failed to save note");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -122,6 +125,7 @@ const NotesPage = () => {
         handleInputChange={(e) => setName(e?.target?.value)}
         primaryText={noteId ? "Update" : "Save"}
         onPrimary={handleSave}
+        loading={loading}
       />
     </div>
   );

@@ -108,7 +108,7 @@ export default function AuthForm({ onSubmit }) {
         px-5 sm:px-10 lg:px-14
         py-8 sm:py-14 lg:py-16
         rounded-3xl
-        bg-transparent backdrop-blur-xs
+        bg-transparent backdrop-blur-xl
         shadow-2xl
         mt-6 sm:mt-10 lg:mt-12
       "

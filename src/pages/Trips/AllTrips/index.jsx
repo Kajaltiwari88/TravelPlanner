@@ -5,6 +5,7 @@ import { deleteTrip, getUserTrips } from "../../../firebase/tripServices";
 import { useAuth } from "../../../context/AuthContext";
 import AppModal from "../../../ReusableComponent/AppModal";
 import toast from "react-hot-toast";
+import AppShimmer from "../../../ReusableComponent/ReusableShimmer";
 
 const Trips = () => {
   const navigate = useNavigate();
@@ -12,16 +13,20 @@ const Trips = () => {
   const [trips, setTrips] = useState([]);
   const [deleteTarget, setDeleteTarget] = useState(null);
   const [isDeleting, setIsDeleting] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (!user?.uid) return;
 
     const fetchTrips = async () => {
       try {
+        setLoading(true);
         const data = await getUserTrips(user?.uid);
         setTrips(data);
       } catch (err) {
         console.error("Failed to fetch trips:", err);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -54,7 +59,10 @@ const Trips = () => {
       </h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {trips?.map((trip) => (
+        {loading && Array.from({ length: 6 }).map((_, index) => (
+          <AppShimmer count={1} key={index} height={120} />
+        ))}
+        {!loading && trips?.map((trip) => (
           <TripsSummary
             key={trip?.id}
             trip={trip}
@@ -67,9 +75,8 @@ const Trips = () => {
       <AppModal
         open={Boolean(deleteTarget)}
         title="Delete Trip?"
-        description={`This will permanently delete ${
-          deleteTarget?.destination
-        } trip.`}
+        description={`This will permanently delete ${deleteTarget?.destination
+          } trip.`}
         primaryText="Delete"
         secondaryText="Cancel"
         danger

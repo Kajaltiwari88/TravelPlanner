@@ -6,6 +6,7 @@ import TripMap from "../../../components/Trips/MapCheckPoints";
 import TripExpenses from "../../../components/Trips/ExpenseTracker";
 import AppCard from "../../../ReusableComponent/ReusableCards";
 import TripWeather from "../../../components/Trips/TripWeather";
+import ItineraryFlowTree from "../../../components/Trips/ItineraryFlowTree";
 import { geoCodingApi } from "../../../utils/constants";
 import { useAuth } from "../../../context/AuthContext";
 import dayjs from "dayjs";
@@ -122,7 +123,10 @@ const TripDetail = () => {
 
       {activeSection === "itinerary" && (
         <div className="space-y-4">
-          <AppCard title="Trip Itinerary" subtitle={trip.itineraryText} />
+          <ItineraryFlowTree
+            itineraryText={trip.itineraryText}
+            tripDays={trip.days}
+          />
         </div>
       )}
 
