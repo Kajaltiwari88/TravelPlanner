@@ -8,9 +8,12 @@ import { auth } from "../../firebase/auth";
 import { useNavigate } from "react-router";
 import * as yup from "yup";
 import toast from "react-hot-toast";
+import { loginUser, signUp } from "../../redux/reducers/auth";
+import { useDispatch } from "react-redux";
 
 export default function AuthForm({ onSubmit }) {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [mode, setMode] = useState("login");
   const isLogin = mode === "login";
   const [loading, setLoading] = useState(false);
@@ -67,22 +70,20 @@ export default function AuthForm({ onSubmit }) {
       await schema.validate(formData, { abortEarly: false });
 
       if (isLogin) {
-        await signInWithEmailAndPassword(
-          auth,
-          formData.email,
-          formData.password
-        );
-        toast.success("Login successful!");
+        const body = {
+          email: formData.email,
+          password: formData.password,
+        };
+        dispatch(loginUser(body));
+        navigate("/");
       } else {
-        await createUserWithEmailAndPassword(
-          auth,
-          formData.email,
-          formData.password
-        );
-        toast.success("Account created successfully!");
+        const body = {
+          name: formData?.fullName,
+          email: formData.email,
+          password: formData.password,
+        };
+        dispatch(signUp(body));
       }
-
-      // navigate("/");
     } catch (error) {
       console.log(error?.inner, "error ");
       if (error?.name === "ValidationError") {
@@ -227,7 +228,7 @@ export default function AuthForm({ onSubmit }) {
               type="button"
               onClick={() =>
                 setVisibleField((prev) =>
-                  prev === "password" ? null : "password"
+                  prev === "password" ? null : "password",
                 )
               }
               className="
@@ -282,7 +283,7 @@ export default function AuthForm({ onSubmit }) {
                 type="button"
                 onClick={() =>
                   setVisibleField((prev) =>
-                    prev === "confirmPassword" ? null : "confirmPassword"
+                    prev === "confirmPassword" ? null : "confirmPassword",
                   )
                 }
                 className="
