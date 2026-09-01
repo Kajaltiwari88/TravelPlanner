@@ -1,10 +1,5 @@
 import { useState } from "react";
 import { EyeOutlined, EyeInvisibleOutlined } from "@ant-design/icons";
-import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
-import { auth } from "../../firebase/auth";
 import { useNavigate } from "react-router";
 import * as yup from "yup";
 import toast from "react-hot-toast";
@@ -62,38 +57,51 @@ export default function AuthForm({ onSubmit }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     setLoading(true);
     setFieldErrors({});
 
     try {
       const schema = isLogin ? loginSchema : signupSchema;
-      await schema.validate(formData, { abortEarly: false });
+
+      await schema.validate(formData, {
+        abortEarly: false,
+      });
 
       if (isLogin) {
         const body = {
           email: formData.email,
           password: formData.password,
         };
-        dispatch(loginUser(body));
+
+        await dispatch(loginUser(body)).unwrap();
+
         navigate("/");
       } else {
         const body = {
-          name: formData?.fullName,
+          name: formData.fullName,
           email: formData.email,
           password: formData.password,
         };
-        dispatch(signUp(body));
+
+        await dispatch(signUp(body)).unwrap();
+
       }
     } catch (error) {
-      console.log(error?.inner, "error ");
       if (error?.name === "ValidationError") {
         const errors = {};
+
         error.inner.forEach((err) => {
-          errors[err.path] = err?.message;
+          errors[err.path] = err.message;
         });
+
         setFieldErrors(errors);
       } else {
-        toast.error(error?.message);
+        toast.error(
+          typeof error === "string"
+            ? error
+            : error?.message || "Something went wrong",
+        );
       }
     } finally {
       setLoading(false);

@@ -1,26 +1,45 @@
-import { onAuthStateChanged, signOut } from "firebase/auth";
 import { createContext, useContext, useEffect, useState } from "react";
-import { auth } from "../firebase/auth";
+import { useDispatch, useSelector } from "react-redux";
+
+import { logout as logoutAction, refreshToken } from "../redux/reducers/auth";
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const dispatch = useDispatch();
+
+  const { loggedInData } = useSelector((state) => state.auth);
+
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const unsub = onAuthStateChanged(auth, (user) => {
-      setUser(user);
-      setLoading(false);
-    });
+    const restoreSession = async () => {
+      try {
+        await dispatch(refreshToken()).unwrap();
+      } catch {
+      } finally {
+        setLoading(false);
+      }
+    };
 
-    return () => unsub();
-  }, []);
+    restoreSession();
+  }, [dispatch]);
 
-  const logout = () => signOut(auth);
+  const user = loggedInData?.data?.user || null;
+
+  const handleLogout = () => {
+    dispatch(logoutAction());
+  };
 
   return (
-    <AuthContext.Provider value={{ user, loading, logout }}>
+    <AuthContext.Provider
+      value={{
+        user,
+        loading,
+        isAuthenticated: !!loggedInData?.data?.token,
+        logout: handleLogout,
+      }}
+    >
       {!loading && children}
     </AuthContext.Provider>
   );
